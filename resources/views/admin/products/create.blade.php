@@ -29,10 +29,10 @@
                             <label for="">Sub Category</label>
                             {{ Form::select('subCategory', $subCategories, null, ['class' => 'form-control']) }}
                         </div>
-                        <div class="form-group">
-                            <label for="">Variation</label>
-                            {{ Form::select('variation', $variations, null, ['class' => 'form-control']) }}
-                        </div>
+                        {{--<div class="form-group">--}}
+                            {{--<label for="">Variation</label>--}}
+                            {{--{{ Form::select('variation', $variations, null, ['class' => 'form-control']) }}--}}
+                        {{--</div>--}}
                         <div class="form-group">
                             <label for="">Strike through Price</label>
                             <input type="text" class="form-control" name="strikeThroughPrice" placeholder="aashirwad-aata">

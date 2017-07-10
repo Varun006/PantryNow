@@ -31,6 +31,16 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'name' => 'required',
+            'category' => 'required',
+            'subCategory' => 'required',
+            'strikeThroughPrice' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+            'photo' => 'required|mime:jpeg,bmp,png'
+        ]);
+
         $request->merge(['slug' => str_slug($request->get('name'))]);
 
         $pid = Product::create($request->input())->id;
