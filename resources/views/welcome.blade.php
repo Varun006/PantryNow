@@ -30,7 +30,7 @@
 
                         <div class="col_four_fifth nobottommargin">
                             <div class="col_half nobottommargin">
-                                <input type="text" class="form-control input-lg not-dark" name="name" value=""
+                                <input type="text" class="form-control input-lg not-dark" name="name"
                                        placeholder="Your Name*" required>
                             </div>
                             <div class="col_half col_last nobottommargin">
