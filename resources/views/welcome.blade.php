@@ -1,95 +1,77 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.public.main')
 
-        <title>Laravel</title>
+@section('extra-css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+@stop
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+@section('title')
+    <title>Coming Soon!</title>
+@stop
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+@section('slider')
+    <section id="slider" class="slider-parallax dark full-screen"
+             style="background: url({{ @asset('images/landing/landing1.jpg') }}) center;">
 
-            .full-height {
-                height: 100vh;
-            }
+        <div class="slider-parallax-inner">
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+            <div class="container clearfix">
 
-            .position-ref {
-                position: relative;
-            }
+                <div class="vertical-middle">
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+                    <div class="heading-block center nobottomborder">
+                        <h1 data-animate="fadeInUp">We are working very hard!
+                        </h1>
+                        <span data-animate="fadeInUp" data-delay="300">PantryNow will be up soon.</span>
+                    </div>
 
-            .content {
-                text-align: center;
-            }
+                    <form action="posted" method="post" role="form" class="landing-wide-form clearfix">
 
-            .title {
-                font-size: 84px;
-            }
+                        {{csrf_field()}}
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+                        <div class="col_four_fifth nobottommargin">
+                            <div class="col_half nobottommargin">
+                                <input type="text" class="form-control input-lg not-dark" name="name" value=""
+                                       placeholder="Your Name*">
+                            </div>
+                            <div class="col_half col_last nobottommargin">
+                                <input type="email" class="form-control input-lg not-dark" value="" name="email"
+                                       placeholder="Your Email*" required>
+                            </div>
+                        </div>
+                        <div class="col_one_fifth col_last nobottommargin">
+                            <button class="btn btn-lg btn-danger btn-block nomargin" value="submit" type="submit"
+                                    style="">KEEP ME UPDATED
+                            </button>
+                        </div>
+                    </form>
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
-                    @endif
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
             </div>
+
         </div>
-    </body>
-</html>
+
+    </section>
+@stop
+
+@section('extra-scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+@stop
+
+@section('extra-js')
+    @if(session()->has('success'))
+        <script>
+            $(function() {
+                swal("Success!", "We will send you major updates.", "success")
+            })
+        </script>
+    @endif
+
+    @if($errors->count() != 0)
+        <script>
+            $(function() {
+                swal("Error!", "Please fill in your valid details", "error")
+            })
+        </script>
+    @endif
+@stop

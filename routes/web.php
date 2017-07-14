@@ -6,3 +6,9 @@ Route::prefix('admin')->group(function () {
     Route::resource('variations','VariationsController');
     Route::resource('products','ProductController');
 });
+
+Route::get('/', function() {
+   return view('welcome');
+});
+
+Route::post('posted','PostedController@store');
