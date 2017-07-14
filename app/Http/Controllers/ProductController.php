@@ -38,7 +38,7 @@ class ProductController extends Controller
             'strikeThroughPrice' => 'required',
             'price' => 'required',
             'description' => 'required',
-            'photo' => 'required|mime:jpeg,bmp,png'
+            'photo' => 'required|image'
         ]);
 
         $request->merge(['slug' => str_slug($request->get('name'))]);
