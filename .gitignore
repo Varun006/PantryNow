@@ -10,4 +10,4 @@ Homestead.yaml
 npm-debug.log
 sshkey.txt
 sshkey.txt.pub
-.env
+
