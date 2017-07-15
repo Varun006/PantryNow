@@ -10,7 +10,7 @@ class PostedController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
+//            'name' => 'required',
             'email' => 'required|email'
         ]);
 

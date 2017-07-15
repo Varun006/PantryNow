@@ -10,7 +10,7 @@
 
 @section('slider')
     <section id="slider" class="slider-parallax dark full-screen"
-             style="background: url({{ @asset('images/landing/landing1.jpg') }}) center;">
+             style="background: url({{ @asset('images/bg2.jpg') }}) center;">
 
         <div class="slider-parallax-inner">
 
@@ -19,9 +19,8 @@
                 <div class="vertical-middle">
 
                     <div class="heading-block center nobottomborder">
-                        <h1 data-animate="fadeInUp">We are working very hard!
-                        </h1>
-                        <span data-animate="fadeInUp" data-delay="300">PantryNow will be up soon.</span>
+                        <h1 data-animate="fadeInUp">Sign up to stay updated.</h1>
+                        {{--<span data-animate="fadeInUp" data-delay="300">Sign up to stay updated.</span>--}}
                     </div>
 
                     <form action="posted" method="post" role="form" class="landing-wide-form clearfix">
@@ -29,11 +28,7 @@
                         {{csrf_field()}}
 
                         <div class="col_four_fifth nobottommargin">
-                            <div class="col_half nobottommargin">
-                                <input type="text" class="form-control input-lg not-dark" name="name"
-                                       placeholder="Your Name*" required>
-                            </div>
-                            <div class="col_half col_last nobottommargin">
+                            <div class="col_full nobottommargin">
                                 <input type="email" class="form-control input-lg not-dark" value="" name="email"
                                        placeholder="Your Email*" required>
                             </div>

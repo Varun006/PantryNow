@@ -13,12 +13,12 @@
 
             <div class="col_half col_last tright">
                 <div class="fright clearfix">
-                    <a href="#" class="social-icon si-small si-borderless si-facebook">
+                    <a href="https://www.facebook.com/PantryNow/" class="social-icon si-small si-borderless si-facebook">
                         <i class="icon-facebook"></i>
                         <i class="icon-facebook"></i>
                     </a>
 
-                    <a href="#" class="social-icon si-small si-borderless si-twitter">
+                    <a href="https://twitter.com/pantrynow" class="social-icon si-small si-borderless si-twitter">
                         <i class="icon-twitter"></i>
                         <i class="icon-twitter"></i>
                     </a>
