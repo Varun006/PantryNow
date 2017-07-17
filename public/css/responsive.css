@@ -168,7 +168,7 @@
 	.postcontent .post-grid.grid-3 .entry { width: 213px; }
 
 	/* Blog - Grid - 2 Columns
-	-----------------------------------------------------------------*/
+g	-----------------------------------------------------------------*/
 
 	.post-grid.grid-2 .entry { width: 450px; }
 
@@ -1639,7 +1639,7 @@
 
 	.swiper_wrapper:not(.force-full-screen),
 	.swiper_wrapper:not(.force-full-screen):not(.canvas-slider-grid) .swiper-slide,
-	.ei-slider { height: 180px !important; }
+	.ei-slider { height: 100vh !important; }
 
 	.swiper_wrapper .slider-caption h2 { font-size: 28px; }
 
