@@ -34,7 +34,7 @@
 
     <!-- Header
     ============================================= -->
-@include('layouts.public.header')
+{{--@include('layouts.public.header')--}}
 
 @yield('slider')
 
