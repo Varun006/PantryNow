@@ -18,7 +18,7 @@
                 <div class="swiper-wrapper">
                     <div class="swiper-slide dark" style="background-image: url({{ @asset('images/bg2.jpg') }});">
                         <div class="container clearfix">
-                            <div class="vertical-middle">
+                            {{--<div class="vertical-middle">--}}
 
                                 <div class="heading-block center nobottomborder">
                                     {{--<h1 data-animate="fadeInUp">Sign up to stay updated.</h1>--}}
@@ -42,7 +42,7 @@
                                     </div>
                                 </form>
 
-                            </div>
+                            {{--</div>--}}
                         </div>
                     </div>
                 </div>
