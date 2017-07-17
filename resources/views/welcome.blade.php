@@ -9,41 +9,44 @@
 @stop
 
 @section('slider')
-    <section id="slider" class="slider-parallax dark full-screen"
-             style="background: url({{ @asset('images/bg2.jpg') }}) center;">
+    <section id="slider" class="slider-parallax swiper_wrapper dark full-screen clearfix"
+             {{--style="background: url({{ @asset('images/bg2.jpg') }}) center;"--}}
+             >
 
         <div class="slider-parallax-inner">
+            <div class="swiper-container swiper-parent">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide dark" style="background-image: url({{ @asset('images/bg2.jpg') }});">
+                        <div class="container clearfix">
+                            <div class="vertical-middle">
 
-            <div class="container clearfix">
+                                <div class="heading-block center nobottomborder">
+                                    {{--<h1 data-animate="fadeInUp">Sign up to stay updated.</h1>--}}
+                                    {{--<span data-animate="fadeInUp" data-delay="300">Sign up to stay updated.</span>--}}
+                                </div>
 
-                <div class="vertical-middle">
+                                <form action="posted" method="post" role="form" class="landing-wide-form clearfix">
 
-                    <div class="heading-block center nobottomborder">
-                        <h1 data-animate="fadeInUp">Sign up to stay updated.</h1>
-                        {{--<span data-animate="fadeInUp" data-delay="300">Sign up to stay updated.</span>--}}
-                    </div>
+                                    {{csrf_field()}}
 
-                    <form action="posted" method="post" role="form" class="landing-wide-form clearfix">
+                                    <div class="col_four_fifth nobottommargin">
+                                        <div class="col_full nobottommargin">
+                                            <input type="email" class="form-control input-lg not-dark" value="" name="email"
+                                                   placeholder="Your Email*" required>
+                                        </div>
+                                    </div>
+                                    <div class="col_one_fifth col_last nobottommargin">
+                                        <button class="btn btn-lg btn-danger btn-block nomargin" value="submit" type="submit"
+                                                style="">KEEP ME UPDATED
+                                        </button>
+                                    </div>
+                                </form>
 
-                        {{csrf_field()}}
-
-                        <div class="col_four_fifth nobottommargin">
-                            <div class="col_full nobottommargin">
-                                <input type="email" class="form-control input-lg not-dark" value="" name="email"
-                                       placeholder="Your Email*" required>
                             </div>
                         </div>
-                        <div class="col_one_fifth col_last nobottommargin">
-                            <button class="btn btn-lg btn-danger btn-block nomargin" value="submit" type="submit"
-                                    style="">KEEP ME UPDATED
-                            </button>
-                        </div>
-                    </form>
-
+                    </div>
                 </div>
-
             </div>
-
         </div>
 
     </section>
