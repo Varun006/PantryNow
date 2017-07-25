@@ -15,4 +15,16 @@ Route::get('faq', function() {
     return view('faq');
 });
 
+Route::get('categories', function(){
+    return view('categories');
+});
+
+Route::get('cart', function(){
+    return view('cart');
+});
+
+Route::get('checkout', function(){
+    return view('checkout');
+});
+
 Route::post('posted','PostedController@store');

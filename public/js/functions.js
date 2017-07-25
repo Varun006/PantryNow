@@ -298,8 +298,10 @@ var SEMICOLON = SEMICOLON || {};
 
 			if( $window.scrollTop() > Number(elementOffset) ) {
 				$goToTopEl.fadeIn();
+				$body.addClass('gototop-active');
 			} else {
 				$goToTopEl.fadeOut();
+				$body.removeClass('gototop-active');
 			}
 		},
 
@@ -708,7 +710,7 @@ var SEMICOLON = SEMICOLON || {};
 				outClass : animationOut,
 				inDuration : Number(durationIn),
 				outDuration : Number(durationOut),
-				linkElement : '#primary-menu ul li a:not([target="_blank"]):not([href*="#"]):not([data-lightbox]):not([href^="mailto"]):not([href^="tel"]):not([href^="sms"]):not([href^="call"])',
+				linkElement : '#primary-menu:not(.on-click) ul li a:not([target="_blank"]):not([href*="#"]):not([data-lightbox]):not([href^="mailto"]):not([href^="tel"]):not([href^="sms"]):not([href^="call"])',
 				loading : true,
 				loadingParentElement : 'body',
 				loadingClass : 'css3-spinner',
@@ -768,7 +770,12 @@ var SEMICOLON = SEMICOLON || {};
 		},
 
 		defineColumns: function( element ){
-			var column = 4;
+			var column = 4,
+				lgCol = element.attr('data-lg-col'),
+				mdCol = element.attr('data-md-col'),
+				smCol = element.attr('data-sm-col'),
+				xsCol = element.attr('data-xs-col'),
+				xxsCol = element.attr('data-xxs-col');
 
 			if( element.hasClass('portfolio-full') ) {
 				if( element.hasClass('portfolio-3') ) column = 3;
@@ -783,13 +790,8 @@ var SEMICOLON = SEMICOLON || {};
 				} else if( $body.hasClass('device-xxs') ) {
 					column = 1;
 				}
-			} else if( element.hasClass('masonry-thumbs') ) {
 
-				var lgCol = element.attr('data-lg-col'),
-					mdCol = element.attr('data-md-col'),
-					smCol = element.attr('data-sm-col'),
-					xsCol = element.attr('data-xs-col'),
-					xxsCol = element.attr('data-xxs-col');
+			} else if( element.hasClass('masonry-thumbs') ) {
 
 				if( element.hasClass('col-2') ) column = 2;
 				else if( element.hasClass('col-3') ) column = 3;
@@ -797,18 +799,18 @@ var SEMICOLON = SEMICOLON || {};
 				else if( element.hasClass('col-6') ) column = 6;
 				else column = 4;
 
-				if( $body.hasClass('device-lg') ) {
-					if( lgCol ) { column = Number(lgCol); }
-				} else if( $body.hasClass('device-md') ) {
-					if( mdCol ) { column = Number(mdCol); }
-				} else if( $body.hasClass('device-sm') ) {
-					if( smCol ) { column = Number(smCol); }
-				} else if( $body.hasClass('device-xs') ) {
-					if( xsCol ) { column = Number(xsCol); }
-				} else if( $body.hasClass('device-xxs') ) {
-					if( xxsCol ) { column = Number(xxsCol); }
-				}
+			}
 
+			if( $body.hasClass('device-lg') ) {
+				if( lgCol ) { column = Number(lgCol); }
+			} else if( $body.hasClass('device-md') ) {
+				if( mdCol ) { column = Number(mdCol); }
+			} else if( $body.hasClass('device-sm') ) {
+				if( smCol ) { column = Number(smCol); }
+			} else if( $body.hasClass('device-xs') ) {
+				if( xsCol ) { column = Number(xsCol); }
+			} else if( $body.hasClass('device-xxs') ) {
+				if( xxsCol ) { column = Number(xxsCol); }
 			}
 
 			return column;
@@ -1079,7 +1081,7 @@ var SEMICOLON = SEMICOLON || {};
 				return true;
 			}
 
-			$('body:not(.side-header) #primary-menu > ul, body:not(.side-header) #primary-menu > div > ul:not(.dropdown-menu), .top-links > ul').superfish({
+			$('body:not(.side-header) #primary-menu:not(.on-click) > ul, body:not(.side-header) #primary-menu:not(.on-click) > div > ul:not(.dropdown-menu), .top-links:not(.on-click) > ul').superfish({
 				popUpSelector: 'ul,.mega-menu-content,.top-link-section',
 				delay: 250,
 				speed: 350,
@@ -1103,7 +1105,7 @@ var SEMICOLON = SEMICOLON || {};
 				}
 			});
 
-			$('body.side-header #primary-menu > ul').superfish({
+			$('body.side-header #primary-menu:not(.on-click) > ul').superfish({
 				popUpSelector: 'ul',
 				delay: 250,
 				speed: 350,
@@ -1144,6 +1146,12 @@ var SEMICOLON = SEMICOLON || {};
 
 				$('#primary-menu.sub-title').children('ul').children('.current').prev().css({ backgroundImage : 'none' });
 			}
+
+			$('#primary-menu.on-click li:has(ul) > a').on( 'click', function(e){
+				$(this).parents('.sub-menu').siblings().find('ul,.mega-menu-content').removeClass('show');
+				$(this).parent('li').children('ul,.mega-menu-content').toggleClass('show');
+				e.preventDefault();
+			});
 
 			// var responsiveThreshold = $header.attr('data-responsive-under');
 			// if( !responsiveThreshold ) { responsiveThreshold = 992; }
@@ -1466,6 +1474,7 @@ var SEMICOLON = SEMICOLON || {};
 				if (!$(event.target).closest('#top-cart').length) { $topCart.toggleClass('top-cart-open', false); }
 				if (!$(event.target).closest('#page-menu').length) { $pagemenu.toggleClass('pagemenu-active', false); }
 				if (!$(event.target).closest('#side-panel').length) { $body.toggleClass('side-panel-open', false); }
+				if (!$(event.target).closest('#primary-menu').length) { $('#primary-menu.on-click > ul').find('.show').removeClass('show'); }
 				if (!$(event.target).closest('#primary-menu.mobile-menu-off-canvas > ul').length) { $('#primary-menu.mobile-menu-off-canvas > ul').toggleClass('show', false); }
 				if (!$(event.target).closest('#primary-menu.mobile-menu-off-canvas > div > ul').length) { $('#primary-menu.mobile-menu-off-canvas > div > ul').toggleClass('show', false); }
 			});
@@ -1728,7 +1737,7 @@ var SEMICOLON = SEMICOLON || {};
 				} else {
 					$sliderParallaxEl.addClass('slider-parallax-invisible').removeClass('slider-parallax-visible');
 				}
-				if (requesting) {
+				if(requesting) {
 					requestAnimationFrame(function(){
 						SEMICOLON.slider.sliderParallax();
 						SEMICOLON.slider.sliderElementsFade();
@@ -2400,7 +2409,7 @@ var SEMICOLON = SEMICOLON || {};
 
 		tabsJustify: function(){
 			if( !$('body').hasClass('device-xxs') && !$('body').hasClass('device-xs') ){
-				var $tabsJustify = $('.tabs.tabs-justify');
+				var $tabsJustify = $('.tabs.tabs-justify:not(.customjs)');
 				if( $tabsJustify.length > 0 ) {
 					$tabsJustify.each( function(){
 						var element = $(this),
@@ -2434,7 +2443,7 @@ var SEMICOLON = SEMICOLON || {};
 				return true;
 			}
 
-			var $tabsResponsive = $('.tabs.tabs-responsive');
+			var $tabsResponsive = $('.tabs.tabs-responsive:not(.customjs)');
 			if( $tabsResponsive.length < 1 ) { return true; }
 
 			$tabsResponsive.each( function(){
@@ -2460,7 +2469,7 @@ var SEMICOLON = SEMICOLON || {};
 				return true;
 			}
 
-			var $tabsResponsive = $('.tabs.tabs-responsive');
+			var $tabsResponsive = $('.tabs.tabs-responsive:not(.customjs)');
 			if( $tabsResponsive.length < 1 ) { return true; }
 
 			$tabsResponsive.each( function(){
@@ -2529,9 +2538,11 @@ var SEMICOLON = SEMICOLON || {};
 							element.find('.acctitle').removeClass('acctitlec').next().slideUp("normal");
 							var clickTarget = $(this);
 							$(this).toggleClass('acctitlec').next().slideDown("normal", function(){
-								$('html,body').stop(true).animate({
-									'scrollTop': clickTarget.offset().top - ( SEMICOLON.initialize.topScrollOffset() - 40 )
-								}, 800, 'easeOutQuad' );
+								if( $body.hasClass('device-xs') || $body.hasClass('device-xxs') ) {
+									$('html,body').stop(true).animate({
+										'scrollTop': clickTarget.offset().top - ( SEMICOLON.initialize.topScrollOffset() - 40 )
+									}, 800, 'easeOutQuad' );
+								}
 							});
 						}
 						return false;
@@ -3152,9 +3163,11 @@ var SEMICOLON = SEMICOLON || {};
 					divScrollEasing = element.attr('data-easing'),
 					divScrollHighlight = element.attr('data-highlight');
 
-					if( !divScrollSpeed ) { divScrollSpeed = 750; }
-					if( !divScrollOffset ) { divScrollOffset = SEMICOLON.initialize.topScrollOffset(); }
-					if( !divScrollEasing ) { divScrollEasing = 'easeOutQuad'; }
+				if( element.parents('#primary-menu.on-click') ) { return true; }
+
+				if( !divScrollSpeed ) { divScrollSpeed = 750; }
+				if( !divScrollOffset ) { divScrollOffset = SEMICOLON.initialize.topScrollOffset(); }
+				if( !divScrollEasing ) { divScrollEasing = 'easeOutQuad'; }
 
 				$('html,body').stop(true).animate({
 					'scrollTop': $( divScrollToAnchor ).offset().top - Number(divScrollOffset)
@@ -3708,7 +3721,7 @@ var SEMICOLON = SEMICOLON || {};
 		$cookieNotification = $('#cookie-notification');
 
 	$(document).ready( SEMICOLON.documentOnReady.init );
-	$window.load( SEMICOLON.documentOnLoad.init );
+	$window.on( 'load', SEMICOLON.documentOnLoad.init );
 	$window.on( 'resize', SEMICOLON.documentOnResize.init );
 
 })(jQuery);

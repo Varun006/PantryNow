@@ -5,7 +5,7 @@
 	Description: The Multi-Purpose Template
 	Author: SemiColonWeb
 	Author URI: http://themeforest.net/user/semicolonweb
-	Version: 4.4
+	Version: 4.5
 
 -----------------------------------------------------------------------------------*/
 
@@ -11930,11 +11930,11 @@ button.toast-close-button {
 .device-lg.sticky-footer #header,
 .device-md.sticky-footer #header { z-index: 199; }
 
-.device-lg.sticky-footer #slider,
+.device-lg.sticky-footer #slider:not(.slider-parallax-invisible),
 .device-lg.sticky-footer #page-submenu,
 .device-lg.sticky-footer #page-title,
 .device-lg.sticky-footer #content,
-.device-md.sticky-footer #slider,
+.device-md.sticky-footer #slider:not(.slider-parallax-invisible),
 .device-md.sticky-footer #page-submenu,
 .device-md.sticky-footer #page-title,
 .device-md.sticky-footer #content { z-index: 2; }

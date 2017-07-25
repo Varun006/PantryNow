@@ -168,7 +168,7 @@
 	.postcontent .post-grid.grid-3 .entry { width: 213px; }
 
 	/* Blog - Grid - 2 Columns
-g	-----------------------------------------------------------------*/
+	-----------------------------------------------------------------*/
 
 	.post-grid.grid-2 .entry { width: 450px; }
 
@@ -631,6 +631,8 @@ g	-----------------------------------------------------------------*/
 		position: absolute;
 		cursor: pointer;
 		width: 32px;
+		height: 50px;
+		line-height: 51px;
 		top: 0;
 		right: 0;
 		z-index: 1;
@@ -642,6 +644,16 @@ g	-----------------------------------------------------------------*/
 
 	#primary-menu ul.windows-mobile-menu li.sub-menu a.wn-submenu-trigger i { margin: 0 !important; }
 
+	#primary-menu ul.windows-mobile-menu ul li.sub-menu a.wn-submenu-trigger {
+		text-align: center !important;
+		height: 45px;
+		line-height: 45px;
+	}
+
+	#primary-menu ul.windows-mobile-menu ul li.sub-menu a.wn-submenu-trigger i {
+		display: inline-block;
+		line-height: 45px;
+	}
 
 	#header.sticky-style-3 #top-cart .top-cart-content { top: 40px; }
 
@@ -1639,7 +1651,7 @@ g	-----------------------------------------------------------------*/
 
 	.swiper_wrapper:not(.force-full-screen),
 	.swiper_wrapper:not(.force-full-screen):not(.canvas-slider-grid) .swiper-slide,
-	.ei-slider { height: 100vh !important; }
+	.ei-slider { height: 180px !important; }
 
 	.swiper_wrapper .slider-caption h2 { font-size: 28px; }
 
