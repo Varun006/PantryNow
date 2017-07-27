@@ -9,21 +9,13 @@
 @stop
 
 @section('slider')
-    <section id="slider" class="slider-parallax swiper_wrapper dark full-screen clearfix"
-             {{--style="background: url({{ @asset('images/bg2.jpg') }}) center;"--}}
-             >
-
+    <section id="slider" class="slider-parallax swiper_wrapper dark full-screen clearfix">
         <div class="slider-parallax-inner">
             <div class="swiper-container swiper-parent">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide dark" style="background-image: url({{ @asset('images/bg2.jpg') }});">
                         <div class="container clearfix">
                             <div class="vertical-middle">
-
-                                {{--<div class="heading-block center nobottomborder">--}}
-                                    {{--<h1 data-animate="fadeInUp">Sign up to stay updated.</h1>--}}
-                                    {{--<span data-animate="fadeInUp" data-delay="300">Sign up to stay updated.</span>--}}
-                                {{--</div>--}}
 
                                 <form action="posted" method="post" role="form" class="landing-wide-form clearfix">
 

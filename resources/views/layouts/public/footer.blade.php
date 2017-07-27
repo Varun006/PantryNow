@@ -8,7 +8,7 @@
 
             <div class="col_half">
                 Copyrights &copy; 2017 All Rights Reserved by PantryNow<br>
-                <div class="copyright-links"><a href="#">Terms of Use</a> / <a href="#">Privacy Policy</a></div>
+                <div class="copyright-links"><a href="#">Terms of Use</a> / <a href="{{ @asset('privacy.pdf') }}" target="_blank">Privacy Policy</a></div>
             </div>
 
             <div class="col_half col_last tright">
