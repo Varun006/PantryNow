@@ -6,6 +6,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('variations','VariationsController');
     Route::resource('products','ProductController');
     Route::post('product/delete/','ProductController@destroy');
+    Route::post('category/delete/','CategoryController@destroy');
 });
 
 Route::get('/', function() {

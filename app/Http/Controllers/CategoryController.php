@@ -45,4 +45,18 @@ class CategoryController extends Controller
 
         return back()->with('success',true);
     }
+
+    public function destroy(Category $category)
+    {
+        if ($category->exists()) {
+            Category::destroy(request('id'));
+            return response()->json([
+                'success' => true
+            ]);
+        } else {
+            return response()->json([
+                'success' => false
+            ]);
+        }
+    }
 }

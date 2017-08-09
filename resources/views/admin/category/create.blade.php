@@ -36,9 +36,9 @@
 	$(document).ready(function(){
 		swal({
 			title: 'Success',
-		    text: "Category created succesfully!",
+		    text: "Category created successfully!",
 		    type: 'success',
-		    showCancelButton: true,
+		    showCancelButton: true
 		});
 	});
 </script>	
