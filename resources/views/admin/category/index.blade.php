@@ -37,9 +37,9 @@
                                         	<a href="/admin/category/{{$category->id}}/edit">
                                         		<button type="button" class="btn btn-info w-md m-b-5">Edit</button>                    
                                             </a>
-                                            <a href="javascript:void(0);">
-                                                <button type="button" id="{{$category->id}}" class="btn btn-danger delete w-md m-b-5">Delete</button>
-                                            </a>
+                                            {{--<a href="javascript:void(0);">--}}
+                                                {{--<button type="button" id="{{$category->id}}" class="btn btn-danger delete w-md m-b-5">Delete</button>--}}
+                                            {{--</a>--}}
                                         </td>
                                     </tr>
                                     @endforeach
