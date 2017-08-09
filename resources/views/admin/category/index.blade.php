@@ -13,9 +13,9 @@
 	            	<div class="panel-heading">
 	                    <div class="panel-title">
 	                        <h4>Category Listing</h4>
-                            <a href="/admin/category/create">
-                                <button type="button" class="btn btn-primary w-md m-b-5">Add a new category</button>
-                            </a>    
+                            {{--<a href="/admin/category/create">--}}
+                                {{--<button type="button" class="btn btn-primary w-md m-b-5">Add a new category</button>--}}
+                            {{--</a>    --}}
 	                    </div>
                 	</div>
                 	<div class="panel-body">

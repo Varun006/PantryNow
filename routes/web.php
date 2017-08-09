@@ -5,6 +5,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('subCategory','SubCategoryController');
     Route::resource('variations','VariationsController');
     Route::resource('products','ProductController');
+    Route::post('product/delete/','ProductController@destroy');
 });
 
 Route::get('/', function() {
@@ -28,3 +29,7 @@ Route::get('checkout', function(){
 });
 
 Route::post('posted','PostedController@store');
+
+Route::get('search',function(){
+    return view('search');
+});

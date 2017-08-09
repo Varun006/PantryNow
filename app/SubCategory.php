@@ -9,4 +9,9 @@ class SubCategory extends Model
     protected $guarded = ['id'];
 
     protected $table = 'sub_categories';
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

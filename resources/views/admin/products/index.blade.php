@@ -34,13 +34,12 @@
                                         <td>{{$product->name}}</td>
                                         <td>{{$product->created_at->toFormattedDateString()}}</td>
                                         <td>
-                                            Pending..
-                                            {{--<a href="/admin/subCategory/{{$subCategory->id}}/edit">--}}
-                                                {{--<button type="button" class="btn btn-info w-md m-b-5">Edit</button>--}}
-                                            {{--</a>--}}
-                                            {{--<a href="javascript:void(0);">    --}}
-                                            {{--<button type="button" id="{{$tag->id}}" class="btn btn-danger delete w-md m-b-5">Delete</button>--}}
-                                            {{--</a>                                         --}}
+                                            <a href="/admin/products/{{$product->id}}/edit">
+                                                <button type="button" class="btn btn-info w-md m-b-5">Edit</button>
+                                            </a>
+                                            <a href="javascript:void(0);">
+                                            <button type="button" id="{{$product->id}}" class="btn btn-danger delete w-md m-b-5">Delete</button>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -73,7 +72,7 @@
                 var id = $(this).attr('id');
                 swal({
                         title: "Are you sure?",
-                        text: "Do you want to delete this sub-category?",
+                        text: "Do you want to delete this product?",
                         type: "warning",
                         showCancelButton: true,
                         confirmButtonColor: "#DD6B55",
@@ -82,7 +81,7 @@
                     },
                     function(){
                         $.ajax({
-                            url : '/admin/subCategory/delete/',
+                            url : '/admin/product/delete/',
                             data: {'id' : id , "_token": "{{ csrf_token() }}"},
                             type: 'POST',
                             success: function(resp){
@@ -95,10 +94,21 @@
                                             timeOut: 4000,
                                             positionClass: "toast-top-right"
                                         };
-                                        toastr.success('Category deleted successfully.');
+                                        toastr.success('Product deleted successfully.');
                                     }, 1300);
                                     setTimeout(function () {
                                         location.reload(true);
+                                    }, 1300);
+                                }else{
+                                    setTimeout(function () {
+                                        toastr.options = {
+                                            closeButton: true,
+                                            progressBar: true,
+                                            showMethod: 'slideDown',
+                                            timeOut: 8000,
+                                            positionClass: "toast-top-right"
+                                        };
+                                        toastr.error('Product does not exist.');
                                     }, 1300);
                                 }
                             }
