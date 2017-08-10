@@ -41,7 +41,7 @@ class CategoryController extends Controller
             'name' => 'required'
         ]);
 
-        $category->update(['name' => $request->get('name')]);
+        $category->update(['name' => $request->get('name') , 'slug' => str_slug($request->get('name'))]);
 
         return back()->with('success',true);
     }
@@ -58,5 +58,10 @@ class CategoryController extends Controller
                 'success' => false
             ]);
         }
+    }
+
+    public function showProducts(Category $category)
+    {
+        dd($category);
     }
 }

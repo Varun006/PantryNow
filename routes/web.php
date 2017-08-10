@@ -17,9 +17,7 @@ Route::get('faq', function() {
     return view('faq');
 });
 
-Route::get('categories', function(){
-    return view('categories');
-});
+Route::get('categories/{category}','CategoryController@showProducts');
 
 Route::get('cart', function(){
     return view('cart');
