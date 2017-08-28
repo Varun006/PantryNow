@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Cart;
 use App\Coupon;
 use App\Product;
+use App\ShippingAddress;
+use App\zipcode;
 use Illuminate\Support\Facades\Storage;
 
 class CartController extends Controller
@@ -22,7 +24,10 @@ class CartController extends Controller
     {
         $success = false;
 
-        if (auth()->check()) {
+        $zip = false;
+
+        if (auth()->check() && $this->validZip()) {
+
             Cart::create(['product_id' => request('id'), 'user_id' => auth()->id()]);
 
             $success = true;
@@ -30,8 +35,16 @@ class CartController extends Controller
 
         return response()->json([
             'success' => $success,
-            'auth' => auth()->check()
+            'auth' => auth()->check(),
+            'zip' => $zip
         ]);
+    }
+
+    protected function validZip()
+    {
+        $user_zip = ShippingAddress::where('user_id', auth()->id())->value('zip');
+
+        return zipcode::where('zip', $user_zip)->exist();
     }
 
     public function getCartItems($array = false)

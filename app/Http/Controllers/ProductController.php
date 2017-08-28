@@ -78,25 +78,25 @@ class ProductController extends Controller
     {
         $product = collect(Product::whereSlug($slug)->first());
 
-        $cat_name = Category::where('id',$product['category'])->pluck('name')->first();
+        $cat_name = Category::where('id', $product['category'])->pluck('name')->first();
 
-        $sub_cat_name = SubCategory::where('id',$product['subCategory'])->pluck('name')->first();
+        $sub_cat_name = SubCategory::where('id', $product['subCategory'])->pluck('name')->first();
 
-        $photo = Storage::disk('s3')->url('products/'.$product['photo']);
+        $photo = Storage::disk('s3')->url('products/' . $product['photo']);
 
-        $product->put('categoryName' , $cat_name);
+        $product->put('categoryName', $cat_name);
 
-        $product->put('subCategoryName' , $sub_cat_name);
+        $product->put('subCategoryName', $sub_cat_name);
 
-        $product->put('photo_url' , $photo);
+        $product->put('photo_url', $photo);
 
-        $related = Product::where('subCategory',$product['subCategory'])->take(5)->get();
+        $related = Product::where('subCategory', $product['subCategory'])->take(5)->get();
 
         $related->each(function ($product) {
-            $product->photo_url = Storage::disk('s3')->url('products/'.$product['photo']);
+            $product->photo_url = Storage::disk('s3')->url('products/' . $product['photo']);
         });
 
-        return view('single',compact('product','related'));
+        return view('single', compact('product', 'related'));
     }
 
     /**

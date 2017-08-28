@@ -94,9 +94,9 @@
                             <div class="panel panel-default product-meta">
                                 <div class="panel-body">
                                     {{--<span itemprop="productID" class="sku_wrapper">SKU: <span class="sku">8465415</span></span>--}}
-                                    <span class="posted_in">Category: <a href="#"
+                                    <span class="posted_in">Category: <a href="javascript:void(0);"
                                                                          rel="tag">{{ $product['categoryName'] }}</a></span>
-                                    <span class="posted_in">Sub Category: <a href="#"
+                                    <span class="posted_in">Sub Category: <a href="javascript:void(0);"
                                                                              rel="tag">{{ $product['subCategoryName'] }}</a></span>
                                 </div>
                             </div><!-- Product Single - Meta End -->

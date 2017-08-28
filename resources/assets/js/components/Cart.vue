@@ -57,16 +57,17 @@
                             if (!response.data.auth) {
                                 return VueEvents.$emit('show-login');
                             }
-                            if (this.validZipCode) {
-                                if (response.data.success) {
-                                    toastr["success"]("Item added to your cart.");
-                                    this.itemInCart = true;
-                                    VueEvents.$emit('item-added');
-                                } else {
-                                    toastr["info"]("Item already in your cart.");
-                                }
+
+                            if (!response.data.zip) {
+                                return swal('Sorry!','We do not deliver to your zip code yet', 'info');
+                            }
+
+                            if (response.data.success) {
+                                toastr["success"]("Item added to your cart.");
+                                this.itemInCart = true;
+                                VueEvents.$emit('item-added');
                             } else {
-                                swal('Sorry!','We do not deliver to your zip code yet', 'info')
+                                toastr["info"]("Item already in your cart.");
                             }
                         })
                 }
