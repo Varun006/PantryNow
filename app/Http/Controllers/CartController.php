@@ -44,7 +44,7 @@ class CartController extends Controller
     {
         $user_zip = ShippingAddress::where('user_id', auth()->id())->value('zip');
 
-        return zipcode::where('zip', $user_zip)->exist();
+        return zipcode::where('zip', $user_zip)->exists();
     }
 
     public function getCartItems($array = false)
