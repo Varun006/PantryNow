@@ -34,6 +34,7 @@ class StoreShippingAddress
             'building_details' => $event->data['building_details'],
             'zip' => $event->data['zip'],
             'landmark' => is_null($event->data['landmark']) ? 'none' : $event->data['landmark'],
+            'phone' => $event->data['phone']
         ]);
     }
 }
