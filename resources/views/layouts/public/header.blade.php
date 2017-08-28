@@ -40,7 +40,7 @@
                                 <li><a href="myOrders">
                                         <div>My Orders</div>
                                     </a></li>
-                                <li><a href="javascript:void(0);">
+                                <li><a href="shipping">
                                         <div>Shipping Address</div>
                                     </a></li>
                                 <li><a href="javascript:void(0);"
