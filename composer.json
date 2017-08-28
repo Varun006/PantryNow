@@ -6,11 +6,18 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "algolia/algoliasearch-client-php": "^1.18",
+        "barryvdh/laravel-dompdf": "^0.8.0",
+        "barryvdh/laravel-snappy": "^0.3.3",
         "doctrine/dbal": "^2.5",
+        "h4cc/wkhtmltoimage-amd64": "0.12.x",
+        "h4cc/wkhtmltopdf-amd64": "0.12.x",
         "laravel/framework": "5.4.*",
+        "laravel/scout": "^3.0",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.2.0",
-        "league/flysystem-aws-s3-v3": "~1.0"
+        "league/flysystem-aws-s3-v3": "~1.0",
+        "twilio/sdk": "^5.13"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

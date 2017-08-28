@@ -1,23 +1,78 @@
-{{--<header id="header" class="transparent-header page-section dark">--}}
+<header id="header" class="sticky-header full-header" data-sticky-class="not-dark">
 
-    {{--<div id="header-wrap">--}}
+    <div id="header-wrap">
 
-        {{--<div class="container clearfix">--}}
+        <div class="container clearfix">
 
-            {{--<div id="primary-menu-trigger"><i class="icon-reorder"></i></div>--}}
+            <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
 
             <!-- Logo
             ============================================= -->
-            {{--<div id="logo">--}}
-                {{--<a href="/" class="standard-logo" data-dark-logo="images/logo-dark.png"><img src="images/logo.png" alt="Canvas Logo"></a>--}}
-                {{--<a href="/" class="retina-logo" data-dark-logo="images/logo-dark@2x.png"><img src="images/logo@2x.png" alt="Canvas Logo"></a>--}}
-            {{--</div><!-- #logo end -->--}}
+            <div id="logo">
+                <a href="/" class="standard-logo" data-dark-logo="images/300x300.png"><img
+                            src="images/300x300.png" alt="Logo"></a>
+                <a href="/" class="retina-logo" data-dark-logo="images/300x300.png"><img
+                            src="images/300x300.png" alt="Logo"></a>
+            </div><!-- #logo end -->
 
-            <!-- Primary Navigation
-            ============================================= -->
-            {{--@include('layouts.public.nav')--}}
+        <!-- Primary Navigation
+                ============================================= -->
+            <nav id="primary-menu" class="light not-dark">
+                <ul>
+                    <li class="current"><a href="/">
+                            <div>Home</div>
+                        </a>
+                        <ul>
+                            <li><a href="about">
+                                    <div>About US</div>
+                                </a></li>
+                            <li><a href="javascript:void(0);">
+                                    <div>FAQS</div>
+                                </a></li>
+                        </ul>
+                    </li>
+                    @if(auth()->check())
+                        <li>
+                            <a href="javascript:void(0);">
+                                <div>My Account</div>
+                            </a>
+                            <ul>
+                                <li><a href="myOrders">
+                                        <div>My Orders</div>
+                                    </a></li>
+                                <li><a href="javascript:void(0);">
+                                        <div>Shipping Address</div>
+                                    </a></li>
+                                <li><a href="javascript:void(0);"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        <div>Logout</div>
+                                    </a></li>
+                            </ul>
+                        </li>
+                    @else
+                        <li class="">
+                            <a href="/login">
+                                <div>Login</div>
+                            </a>
+                        </li>
+                    @endif
+                </ul>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
+                <!-- Top Cart
+                ============================================= -->
+                <basket></basket>
 
-        {{--</div>--}}
+                <!-- Top Search
+                ============================================= -->
+                <search></search>
 
-    {{--</div>--}}
-    <!--  </header>#header end -->
+            </nav><!-- #primary-menu end -->
+
+        </div>
+
+    </div>
+
+</header><!-- #header end -->

@@ -36,6 +36,8 @@ class ProductController extends Controller
 
     public function update(Product $product, Request $request)
     {
+        $request->merge(['slug' => str_slug($request->get('name'))]);
+
         $product->update($request->except('_method', '_token'));
 
         if ($request->hasFile('photo')) {
@@ -70,6 +72,31 @@ class ProductController extends Controller
                 'success' => false
             ]);
         }
+    }
+
+    public function single($slug)
+    {
+        $product = collect(Product::whereSlug($slug)->first());
+
+        $cat_name = Category::where('id',$product['category'])->pluck('name')->first();
+
+        $sub_cat_name = SubCategory::where('id',$product['subCategory'])->pluck('name')->first();
+
+        $photo = Storage::disk('s3')->url('products/'.$product['photo']);
+
+        $product->put('categoryName' , $cat_name);
+
+        $product->put('subCategoryName' , $sub_cat_name);
+
+        $product->put('photo_url' , $photo);
+
+        $related = Product::where('subCategory',$product['subCategory'])->take(5)->get();
+
+        $related->each(function ($product) {
+            $product->photo_url = Storage::disk('s3')->url('products/'.$product['photo']);
+        });
+
+        return view('single',compact('product','related'));
     }
 
     /**

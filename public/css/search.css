@@ -1,0 +1,32 @@
+#top-search-input {
+    float: none;
+    margin: 33px 0 33px 15px;
+    -webkit-transition: margin .4s ease;
+    -o-transition: margin .4s ease;
+    transition: margin .4s ease;
+}
+
+#top-search-input form {
+    width: 160px;
+    height: 34px;
+    padding: 0;
+    margin: 0;
+}
+
+#header.sticky-header #top-search-input { margin: 13px 0 13px 15px; }
+
+@media (max-width: 991px) {
+
+    #top-search-input {
+        float: none;
+        margin: 20px 0;
+    }
+
+    #top-search-input form {
+        margin: 0 auto;
+        width: 300px;
+    }
+
+}
+
+.device-xs #top-search-input form { width: 100%; }

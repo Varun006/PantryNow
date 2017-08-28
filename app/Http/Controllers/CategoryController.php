@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Product;
+use App\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\Debug\Tests\Fixtures\ClassAlias;
 
 class CategoryController extends Controller
 {
@@ -60,8 +64,24 @@ class CategoryController extends Controller
         }
     }
 
-    public function showProducts(Category $category)
+    public function showProducts($slug)
     {
-        dd($category);
+        $category = Category::whereSlug($slug)->first();
+
+        $products = Product::where('category',$category->id)->get();
+
+        $products->each(function($product) {
+            $product->photo = Storage::disk('s3')->url('products/'.$product->photo);
+            $product->subCategory = SubCategory::where('id', $product->subCategory)->pluck('name')->first();
+        });
+
+        $subCategory = $products->map(function($product) {
+            return collect(collect($product)->unique('subCategory')->all())->map(function($id){
+                $product = Product::find($id);
+                return SubCategory::find($product->subCategory);
+            });
+        });
+
+        return view('categories',compact('products','category','subCategory'));
     }
 }

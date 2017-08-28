@@ -17,7 +17,7 @@
             <li class="active">
                 <a href="/admin/category"><i class="ti-home"></i> <span>Manage Categories</span></a>
             </li>
-             <li>
+            <li>
                 <a href="/admin/subCategory"><i class="ti-pencil-alt"></i> <span>Manage Sub Categories</span></a>
             </li>
             <li>
@@ -25,6 +25,19 @@
             </li>
             <li>
                 <a href="/admin/products"><i class="ti-package"></i> <span>Manage Products</span></a>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="ti-layers"></i>
+                    <span>Manage Orders</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/admin/instantOrders">Instant Orders</a></li>
+                    <li><a href="/admin/scheduledOrders">Scheduled Orders</a></li>
+                </ul>
             </li>
         </ul>
     </div> <!-- /.sidebar -->

@@ -1,11 +1,19 @@
 @extends('layouts.public.main')
 
-@section('extra-css')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css"/>
-@stop
-
 @section('title')
     <title>Checkout</title>
+@stop
+
+@section('page-title')
+    <section id="page-title">
+        <div class="container clearfix">
+            <h1>Checkout</h1>
+            <ol class="breadcrumb">
+                <li><a href="/">Home</a></li>
+                <li class="active">Checkout</li>
+            </ol>
+        </div>
+    </section>
 @stop
 
 @section('content')
@@ -17,152 +25,156 @@
 
             <div class="container clearfix">
 
+                <div class="style-msg infomsg">
+                    <div class="sb-msg"><i class="icon-info-sign"></i><strong>Heads up!</strong> Want it to get delivered at a different address? Click 
+                        <a style="cursor:pointer;" href="/shipping">here</a>
+                    </div>
+                </div>
+
                 <div class="row clearfix">
                     <div class="col-md-6">
                         <h3>Shipping Address</h3>
 
                         <form id="billing-form" name="billing-form" class="nobottommargin" action="#" method="post">
 
-                            <div class="col_half">
+                            <div class="col_full">
                                 <label for="billing-form-name">Name:</label>
-                                <input type="text" id="billing-form-name" name="billing-form-name" value="" class="sm-form-control" />
-                            </div>
-
-                            <div class="col_half col_last">
-                                <label for="billing-form-lname">Last Name:</label>
-                                <input type="text" id="billing-form-lname" name="billing-form-lname" value="" class="sm-form-control" />
+                                <input type="text" id="billing-form-name" name="billing-form-name" value="{{ auth()->user()->name }}"
+                                       class="sm-form-control" readonly/>
                             </div>
 
                             <div class="clear"></div>
 
                             <div class="col_full">
                                 <label for="billing-form-address">Address:</label>
-                                <input type="text" id="billing-form-address" name="billing-form-address" value="" class="sm-form-control" />
+                                <input type="text" id="billing-form-address" name="billing-form-address"
+                                       value="{{ $address->building_details }}"
+                                       class="sm-form-control" readonly/>
                             </div>
 
                             <div class="col_full">
-                                <input type="text" id="billing-form-address2" name="billing-form-adress" value="" class="sm-form-control" />
+                                <label for="billing-form-address">Landmark:</label>
+                                <input type="text" id="billing-form-address2" name="billing-form-adress"
+                                       value="{{ $address->landmark }}"
+                                       class="sm-form-control" readonly/>
                             </div>
 
                             <div class="col_full">
                                 <label for="billing-form-city">City / Town</label>
-                                <input type="text" id="billing-form-city" name="billing-form-city" value="" class="sm-form-control" />
+                                <input type="text" id="billing-form-city" name="billing-form-city"
+                                       value="{{ $address->city }}"
+                                       class="sm-form-control" readonly/>
                             </div>
 
                             <div class="col_half">
                                 <label for="billing-form-email">Email Address:</label>
-                                <input type="email" id="billing-form-email" name="billing-form-email" value="" class="sm-form-control" />
+                                <input type="email" id="billing-form-email" name="billing-form-email"
+                                       value="{{ auth()->user()->email }}"
+                                       class="sm-form-control" readonly/>
                             </div>
 
                             <div class="col_half col_last">
                                 <label for="billing-form-phone">Phone:</label>
-                                <input type="text" id="billing-form-phone" name="billing-form-phone" value="" class="sm-form-control" />
-                            </div>
-
-                            <div class="col_full">
-                                <label for="shipping-form-message">Notes <small>*</small></label>
-                                <textarea class="sm-form-control" id="shipping-form-message" name="shipping-form-message" rows="6" cols="30"></textarea>
+                                <input type="text" id="billing-form-phone" name="billing-form-phone"
+                                       value="{{ $address->phone }}"
+                                       class="sm-form-control" readonly/>
                             </div>
                         </form>
                     </div>
+
                     <div class="col-md-6">
                         <h3>Checkout</h3>
                         <div class="accordion accordion-border clearfix nobottommargin">
-                            <div class="acctitle"><i class="acc-closed icon-ok-circle"></i><i class="acc-open icon-remove-circle"></i>Order Items</div>
+                            <div class="acctitle"><i class="acc-closed icon-ok-circle"></i><i
+                                        class="acc-open icon-remove-circle"></i>Order Details
+                            </div>
                             <div class="acc_content clearfix">
                                 <div class="table-responsive clearfix">
                                     <table class="table cart">
-                                        <thead>
-                                        <tr>
-                                            <th class="cart-product-thumbnail">&nbsp;</th>
-                                            <th class="cart-product-name">Product</th>
-                                            <th class="cart-product-quantity">Quantity</th>
-                                            <th class="cart-product-subtotal">Total</th>
-                                        </tr>
-                                        </thead>
                                         <tbody>
                                         <tr class="cart_item">
-                                            <td class="cart-product-thumbnail">
-                                                <a href="#"><img width="64" height="64" src="images/shop/thumbs/small/dress-3.jpg" alt="Pink Printed Dress"></a>
+                                            <td class="notopborder cart-product-name">
+                                                <strong>Cart Subtotal</strong>
                                             </td>
-
-                                            <td class="cart-product-name">
-                                                <a href="#">Pink Printed Dress</a>
-                                            </td>
-
-                                            <td class="cart-product-quantity">
-                                                <div class="quantity clearfix">
-                                                    1x2
-                                                </div>
-                                            </td>
-
-                                            <td class="cart-product-subtotal">
-                                                <span class="amount">$39.98</span>
+                                            <td class="notopborder cart-product-name">
+                                                <span class="amount">{{ $costBreakUp['subTotal'] }}</span>
                                             </td>
                                         </tr>
                                         <tr class="cart_item">
-                                            <td class="cart-product-thumbnail">
-                                                <a href="#"><img width="64" height="64" src="images/shop/thumbs/small/shoes-2.jpg" alt="Checked Canvas Shoes"></a>
-                                            </td>
-
                                             <td class="cart-product-name">
-                                                <a href="#">Checked Canvas Shoes</a>
+                                                <strong>Shipping</strong>
                                             </td>
-
-                                            <td class="cart-product-quantity">
-                                                <div class="quantity clearfix">
-                                                    1x1
-                                                </div>
-                                            </td>
-
-                                            <td class="cart-product-subtotal">
-                                                <span class="amount">$24.99</span>
+                                            <td class="cart-product-name">
+                                                <span class="amount">{{ $costBreakUp['shipping'] }}</span>
                                             </td>
                                         </tr>
                                         <tr class="cart_item">
-                                            <td class="cart-product-thumbnail">
-                                                <a href="#"><img width="64" height="64" src="images/shop/thumbs/small/tshirt-2.jpg" alt="Pink Printed Dress"></a>
-                                            </td>
-
                                             <td class="cart-product-name">
-                                                <a href="#">Blue Men Tshirt</a>
+                                                <strong>Coupon Discount Received</strong>
                                             </td>
-
-                                            <td class="cart-product-quantity">
-                                                <div class="quantity clearfix">
-                                                    1x3
-                                                </div>
+                                            <td class="cart-product-name">
+                                                <span class="amount">{{ $costBreakUp['discountReceived'] }}</span>
                                             </td>
-
-                                            <td class="cart-product-subtotal">
-                                                <span class="amount">$41.97</span>
+                                        </tr>
+                                        @if(session('schedule'))
+                                            <tr class="cart_item">
+                                                <td class="cart-product-name">
+                                                    <strong>Delivery Scheduled between</strong>
+                                                </td>
+                                                <td class="cart-product-name">
+                                                    <span class="amount color lead"> {{ session('scheduleTime') }}
+                                                        <a href="#" @click.prevent="reschedule">(Change Time)</a>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        @endif
+                                        <tr class="cart_item">
+                                            <td class="cart-product-name">
+                                                <strong>Total Payable</strong>
+                                            </td>
+                                            <td class="cart-product-name">
+                                                <span class="amount color lead">RS. {{ $costBreakUp['total'] }}</span>
+                                            </td>
+                                        </tr>
+                                        <tr class="cart_item">
+                                            <td class="notopborder cart-product-name">
+                                            </td>
+                                            <td class="notopborder cart-product-name">
+                                                <a href="/cart" class="button button-3d fright" style="color: white;">Update
+                                                    Cart</a>
                                             </td>
                                         </tr>
                                         </tbody>
-
                                     </table>
-
                                 </div>
                             </div>
-                            <div class="acctitle"><i class="acc-closed icon-ok-circle"></i><i class="acc-open icon-remove-circle"></i>Place Order</div>
+                            <div class="acctitle"><i class="acc-closed icon-ok-circle"></i><i
+                                        class="acc-open icon-remove-circle"></i>Place Order
+                            </div>
                             <div class="acc_content clearfix">
-                                <form>
+                                <form action="/placeOrder" method="post">
+                                    {{ csrf_field() }}
                                     <div class="col_half nobottommargin">
-                                        <input id="radio-10" class="radio-style" name="radio-group-3" type="radio" checked="">
+                                        <input id="radio-10" class="radio-style" name="radio-group-3" type="radio"
+                                               checked="">
                                         <label for="radio-10" class="radio-style-3-label">Pay Using CCAvenue</label>
                                     </div>
 
                                     <div class="col_half">
-                                        <input id="radio-10" class="radio-style" name="radio-group-3" type="radio" checked="">
+                                        <input id="radio-10" class="radio-style" name="radio-group-3" type="radio"
+                                               checked="">
                                         <label for="radio-10" class="radio-style-3-label">COD</label>
                                     </div>
-                                    <a href="#" class="button button-3d fright">Place Order</a>
+                                    <button class="button button-3d fright" type="submit">
+                                        Place Order
+                                    </button>
                                 </form>
                             </div>
                         </div>
                     </div>
                     <div class="clear bottommargin"></div>
                 </div>
+                <modal-box></modal-box>
             </div>
 
         </div>
@@ -170,3 +182,14 @@
     </section><!-- #content end -->
 
 @stop
+
+
+@if(session()->has('success'))
+@section('extra-js')
+    <script type="text/javascript">
+        $(document).ready(function () {
+            toastr["success"]("Shipping address updated.");
+        });
+    </script>
+@stop
+@endif

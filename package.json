@@ -17,5 +17,11 @@
     "laravel-mix": "^1.0",
     "lodash": "^4.17.4",
     "vue": "^2.1.10"
+  },
+  "dependencies": {
+    "moment": "^2.18.1",
+    "sweetalert2": "^6.6.8",
+    "vue-js-modal": "^1.2.8",
+    "vue-paginate": "^3.5.0"
   }
 }
