@@ -27,7 +27,6 @@ class StoreShippingAddress
      */
     public function handle(NewUserRegistered $event)
     {
-        dd('here');
         ShippingAddress::create([
             'user_id' => $event->user->id,
             'city' => $event->data['city'],
