@@ -6,6 +6,7 @@ use App\Category;
 use App\Product;
 use App\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Debug\Tests\Fixtures\ClassAlias;
 
@@ -15,7 +16,7 @@ class CategoryController extends Controller
     {
         $categories = Category::all();
 
-        return view('admin.category.index',compact('categories'));
+        return view('admin.category.index', compact('categories'));
     }
 
     public function create()
@@ -31,12 +32,12 @@ class CategoryController extends Controller
 
         Category::create($request->input());
 
-        return back()->with('success','true');
+        return back()->with('success', 'true');
     }
 
     public function edit(Category $category)
     {
-        return view('admin.category.edit',compact('category'));
+        return view('admin.category.edit', compact('category'));
     }
 
     public function update(Request $request, Category $category)
@@ -45,9 +46,9 @@ class CategoryController extends Controller
             'name' => 'required'
         ]);
 
-        $category->update(['name' => $request->get('name') , 'slug' => str_slug($request->get('name'))]);
+        $category->update(['name' => $request->get('name'), 'slug' => str_slug($request->get('name'))]);
 
-        return back()->with('success',true);
+        return back()->with('success', true);
     }
 
     public function destroy(Category $category)
@@ -68,20 +69,28 @@ class CategoryController extends Controller
     {
         $category = Category::whereSlug($slug)->first();
 
-        $products = Product::where('category',$category->id)->get();
+        $products = Product::where('category', $category->id)->get();
 
-        $products->each(function($product) {
-            $product->photo = Storage::disk('s3')->url('products/'.$product->photo);
+        $subCat = $products->unique('subCategory')->pluck('subCategory');
+
+        $subCategory = DB::table('sub_categories')
+            ->whereIn('id', $subCat)
+            ->get();
+
+        $products->each(function ($product) {
+            $product->photo = Storage::disk('s3')->url('products/' . $product->photo);
             $product->subCategory = SubCategory::where('id', $product->subCategory)->pluck('name')->first();
         });
 
-        $subCategory = $products->map(function($product) {
-            return collect(collect($product)->unique('subCategory')->all())->map(function($id){
-                $product = Product::find($id);
-                return SubCategory::find($product->subCategory);
-            });
-        });
+//        $subCategory = $products->map(function($product) {
+//            return collect(collect($product)->unique('subCategory')->all())->map(function($id){
+//                $product = Product::find($id);
+//                return SubCategory::find($product->subCategory);
+//            });
+//        });
 
-        return view('categories',compact('products','category','subCategory'));
+//        dd($subCategory);
+
+        return view('categories', compact('products', 'category', 'subCategory'));
     }
 }

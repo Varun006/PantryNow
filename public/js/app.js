@@ -60729,16 +60729,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     if (!response.data.auth) {
                         return VueEvents.$emit('show-login');
                     }
-                    if (_this3.validZipCode) {
-                        if (response.data.success) {
-                            toastr["success"]("Item added to your cart.");
-                            _this3.itemInCart = true;
-                            VueEvents.$emit('item-added');
-                        } else {
-                            toastr["info"]("Item already in your cart.");
-                        }
+
+                    if (!response.data.zip) {
+                        return __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()('Sorry!', 'We do not deliver to your zip code yet', 'info');
+                    }
+
+                    if (response.data.success) {
+                        toastr["success"]("Item added to your cart.");
+                        _this3.itemInCart = true;
+                        VueEvents.$emit('item-added');
                     } else {
-                        __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()('Sorry!', 'We do not deliver to your zip code yet', 'info');
+                        toastr["info"]("Item already in your cart.");
                     }
                 });
             }
@@ -69848,7 +69849,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this = this;
 
         this.getAllProducts(this.category);
-
         VueEvents.$on('get-all-products', function () {
             _this.getAllProducts(_this.category);
         });
@@ -69919,13 +69919,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "href": "#"
       },
+      domProps: {
+        "textContent": _vm._s(sub['name'])
+      },
       on: {
         "click": function($event) {
           $event.preventDefault();
-          _vm.filterByCategory(sub['id'].id);
+          _vm.filterByCategory(sub['id']);
         }
       }
-    }, [_vm._v(_vm._s(sub['id'].name))])])
+    })])
   })], 2)])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true

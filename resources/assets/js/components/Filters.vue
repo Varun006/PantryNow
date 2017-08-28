@@ -13,7 +13,7 @@
                         </a>
                     </li>
                     <li v-for="sub in subCategory">
-                        <a href="#" @click.prevent="filterByCategory(sub['id'].id);">{{ sub['id'].name }}</a>
+                        <a href="#" @click.prevent="filterByCategory(sub['id']);" v-text="sub['name']"></a>
                     </li>
                 </ul>
             </div>
@@ -27,7 +27,6 @@
 
         mounted() {
             this.getAllProducts(this.category);
-
             VueEvents.$on('get-all-products', () => {
                 this.getAllProducts(this.category);
             });
