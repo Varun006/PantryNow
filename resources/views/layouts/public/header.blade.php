@@ -9,14 +9,14 @@
             <!-- Logo
             ============================================= -->
             <div id="logo">
-                <a href="/" class="standard-logo" data-dark-logo="images/300x300.png"><img
-                            src="images/300x300.png" alt="Logo"></a>
-                <a href="/" class="retina-logo" data-dark-logo="images/300x300.png"><img
-                            src="images/300x300.png" alt="Logo"></a>
+                <a href="/" class="standard-logo" data-dark-logo="images/logo-new.png"><img
+                            src="{{@asset('images/logo-new.png')}}" alt="Logo"></a>
+                <a href="/" class="retina-logo" data-dark-logo="images/logo-new.png"><img
+                            src="{{@asset('images/logo-new.png')}}" alt="Logo"></a>
             </div><!-- #logo end -->
 
-        <!-- Primary Navigation
-                ============================================= -->
+            <!-- Primary Navigation
+                    ============================================= -->
             <nav id="primary-menu" class="light not-dark">
                 <ul>
                     <li class="current"><a href="/">
@@ -33,16 +33,10 @@
                     </li>
                     @if(auth()->check())
                         <li>
-                            <a href="javascript:void(0);">
+                            <a href="/myAccount">
                                 <div>My Account</div>
                             </a>
                             <ul>
-                                <li><a href="myOrders">
-                                        <div>My Orders</div>
-                                    </a></li>
-                                <li><a href="shipping">
-                                        <div>Shipping Address</div>
-                                    </a></li>
                                 <li><a href="javascript:void(0);"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

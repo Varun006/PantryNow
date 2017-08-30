@@ -1,78 +1,80 @@
 <template>
-    <table class="table cart table-responsive">
-        <thead>
-        <tr>
-            <th class="cart-product-remove">&nbsp;</th>
-            <th class="cart-product-thumbnail">&nbsp;</th>
-            <th class="cart-product-name">Product</th>
-            <th class="cart-product-price">Unit Price</th>
-            <th class="cart-product-quantity">Quantity</th>
-            <th class="cart-product-subtotal">Total</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr class="cart_item" v-for="item in items">
-            <td class="cart-product-remove">
-                <a href="#" class="remove" @click.prevent="remove(item)" title="Remove this item"><i
-                        class="icon-trash2"></i></a>
-            </td>
+    <div class="table-responsive">
+        <table class="table cart">
+            <thead>
+            <tr>
+                <th class="cart-product-remove">&nbsp;</th>
+                <th class="cart-product-thumbnail">&nbsp;</th>
+                <th class="cart-product-name">Product</th>
+                <th class="cart-product-price">Unit Price</th>
+                <th class="cart-product-quantity">Quantity</th>
+                <th class="cart-product-subtotal">Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="cart_item" v-for="item in items">
+                <td class="cart-product-remove">
+                    <a href="#" class="remove" @click.prevent="remove(item)" title="Remove this item"><i
+                            class="icon-trash2"></i></a>
+                </td>
 
-            <td class="cart-product-thumbnail">
-                <a href="#"><img width="64" height="64" :src="item.photo_url"
-                                 :alt="item.name"></a>
-            </td>
+                <td class="cart-product-thumbnail">
+                    <a href="#"><img width="64" height="64" :src="item.photo_url"
+                                     :alt="item.name"></a>
+                </td>
 
-            <td class="cart-product-name">
-                <a href="#" v-text="item.name"></a>
-            </td>
+                <td class="cart-product-name">
+                    <a href="#" v-text="item.name"></a>
+                </td>
 
-            <td class="cart-product-price">
-                <span class="amount" v-text="item.price"></span>
-            </td>
+                <td class="cart-product-price">
+                    <span class="amount" v-text="item.price"></span>
+                </td>
 
-            <td class="cart-product-quantity">
-                <div class="quantity clearfix">
-                    <input type="button" value="-" class="minus"
-                           @click.prevent="update(item,'decrement')">
-                    <input type="text" name="quantity" v-text="item.quantity" v-model="item.quantity" class="qty"
-                           readonly/>
-                    <input type="button" value="+" class="plus" @click.prevent="update(item,'increment')">
-                </div>
-            </td>
+                <td class="cart-product-quantity">
+                    <div class="quantity clearfix">
+                        <input type="button" value="-" class="minus"
+                               @click.prevent="update(item,'decrement')">
+                        <input type="text" name="quantity" v-text="item.quantity" v-model="item.quantity" class="qty"
+                               readonly/>
+                        <input type="button" value="+" class="plus" @click.prevent="update(item,'increment')">
+                    </div>
+                </td>
 
-            <td class="cart-product-subtotal">
-                <span class="amount" v-text="item.quantity * item.price"></span>
-            </td>
-        </tr>
-        <tr class="cart_item">
-            <td colspan="6">
-                <div class="row clearfix">
-                    <div class="col-md-4 col-xs-4 nopadding" v-if="!isCouponApplied">
-                        <div class="col-xs-7 nopadding">
-                            <input type="text" value="" v-model="code" class="sm-form-control"
-                                   placeholder="Enter Coupon Code..">
+                <td class="cart-product-subtotal">
+                    <span class="amount" v-text="item.quantity * item.price"></span>
+                </td>
+            </tr>
+            <tr class="cart_item">
+                <td colspan="6">
+                    <div class="row clearfix">
+                        <div class="col-md-4 col-xs-4 nopadding" v-if="!isCouponApplied">
+                            <div class="col-xs-7 nopadding">
+                                <input type="text" value="" v-model="code" class="sm-form-control"
+                                       placeholder="Enter Coupon Code..">
+                            </div>
+                            <div class="col-md-4 col-xs-5">
+                                <a href="#"
+                                   class="button button-3d button-black nomargin"
+                                   @click.prevent="validateCoupon"
+                                   :disabled="disabled">
+                                    Apply Coupon
+                                </a>
+                            </div>
                         </div>
-                        <div class="col-md-4 col-xs-5">
-                            <a href="#"
-                               class="button button-3d button-black nomargin"
-                               @click.prevent="validateCoupon"
-                               :disabled="disabled">
-                                Apply Coupon
-                            </a>
+
+                        <div class="col-xs-8 nopadding"
+                             :class="{'col-md-12': col12Class , 'col-md-8 ' : col8Md}">
+                            <a href="/checkout" class="button button-3d notopmargin fright" v-if="!schedule">Proceed to Checkout</a>
+                            <a href="#" @click.prevent="showTimeSelection()" class="button button-3d notopmargin fright"
+                               v-else>Schedule your order</a>
                         </div>
                     </div>
-
-                    <div class="col-xs-8 nopadding"
-                         :class="{'col-md-12': col12Class , 'col-md-8 ' : col8Md}">
-                        <a href="/checkout" class="button button-3d notopmargin fright" v-if="!schedule">Proceed to Checkout</a>
-                        <a href="#" @click.prevent="showTimeSelection()" class="button button-3d notopmargin fright"
-                           v-else>Schedule your order</a>
-                    </div>
-                </div>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </template>
 
 <script>

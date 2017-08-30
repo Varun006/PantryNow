@@ -119,6 +119,8 @@ Route::get('index1',  function (){
 
 Route::post('checkZip','ZipcodeController@check');
 
+Route::post('checkZipFromInput','ZipcodeController@checkZipFromInput');
+
 Route::get('about', function() {
    return view('about');
 });
@@ -129,10 +131,6 @@ Route::get('searchHeader',function(){
 
 Route::get('invoice/{number}','InvoiceController@show');
 
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('myAccount', 'AccountController@show');
 
-//Route::get('pdf',function(){
-//    $pdf = App::make('dompdf.wrapper');
-//    $pdf->loadHTML('<h1>Test</h1>');
-//    return $pdf->stream();
-//});
+//Route::get('/home', 'HomeController@index')->name('home');

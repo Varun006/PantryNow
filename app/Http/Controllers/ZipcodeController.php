@@ -18,4 +18,15 @@ class ZipcodeController extends Controller
            'exist' => $exist
         ]);
     }
+
+    public function checkZipFromInput()
+    {
+        $zip = request()->get('zip');
+
+        $exist = zipcode::where('zip',$zip)->exists();
+
+        return response()->json([
+            'exist' => $exist
+        ]);
+    }
 }

@@ -4,9 +4,69 @@
     <title>About Us</title>
 @stop
 
+@section('page-title')
+    <section id="page-title">
+        <div class="container clearfix">
+            <h1>About Us</h1>
+            <ol class="breadcrumb">
+                <li><a href="/">Home</a></li>
+                <li class="active">About</li>
+            </ol>
+        </div>
+    </section>
+@stop
+
 @section('content')
     <section id="content">
         <div class="content-wrap">
+            <div class="container clearfix">
+                <p>
+                    At PantryNow, we take convenience seriously, and for us it’s about bringing you what you need, as soon as possible, with nothing but a few clicks and 60 minutes in between. With PantryNow you carry a sleek and effortless convenience store right in your pocket. We run on your schedule and understand you always want things to be delivered quickly.
+                    Our Shoppers fulfill your orders from the best stores in your neighbourhood. Your Shopper will pick the best produce, carefully select all your items, and contact you if any items that are out of stock to know if you would like any replacement.
+                </p>
+                <div class="fancy-title center bottommargin">
+                    <h2>HOW IT <span>WORKS</span></h2>
+                </div>
+
+                <div class="col_one_third nobottommargin">
+
+                    <div class="feature-box fbox-plain">
+                        <div class="fbox-icon">
+                            <a href="#"><i class="i-alt">1.</i></a>
+                        </div>
+                        <h3>Choose a Product.</h3>
+                        <p>Perferendis, nam. Eum aperiam vel animi beatae corporis dignissimos, molestias, placeat,
+                            maxime optio ipsam nostrum atque quidem.</p>
+                    </div>
+
+                </div>
+
+                <div class="col_one_third nobottommargin">
+
+                    <div class="feature-box fbox-plain">
+                        <div class="fbox-icon">
+                            <a href="#"><i class="i-alt">2.</i></a>
+                        </div>
+                        <h3>Enter Shipping Info.</h3>
+                        <p>Saepe qui enim at animi. Repellendus, blanditiis doloremque asperiores reprehenderit
+                            deleniti. Ipsam nam accusantium ex!</p>
+                    </div>
+
+                </div>
+
+                <div class="col_one_third col_last">
+
+                    <div class="feature-box fbox-plain">
+                        <div class="fbox-icon">
+                            <a href="#"><i class="i-alt">3.</i></a>
+                        </div>
+                        <h3>Complete your Payment.</h3>
+                        <p>Necessitatibus accusamus, inventore atque commodi, animi architecto ea sed, suscipit tempora
+                            ex deleniti quae. Consectetur, sint velit.</p>
+                    </div>
+
+                </div>
+            </div>
             <div class="container clearfix">
                 <div class="common-height clearfix">
                     <div id="popular-dest-map" class="col-md-8 col-padding gmap hidden-xs"></div>

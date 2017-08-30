@@ -29,6 +29,7 @@ Vue.component('modal-box', require('./components/Modal.vue'));
 Vue.component('thank-you', require('./components/ThankYou.vue'));
 Vue.component('login-modal', require('./components/LoginModal.vue'));
 Vue.component('logged-in-modal', require('./components/loggedInModal.vue'));
+Vue.component('ask-zip', require('./components/askZip.vue'));
 
 const app = new Vue({
     el: '#app',

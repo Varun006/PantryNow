@@ -56,7 +56,7 @@
         mounted() {
             this.getCartTotal();
 
-            VueEvents.$on('coupon-applied', ( isCouponApplied, code) => {
+            VueEvents.$on('coupon-applied', (isCouponApplied, code) => {
                 this.couponApplied = isCouponApplied;
                 this.couponCode = code;
                 this.getCartTotal();

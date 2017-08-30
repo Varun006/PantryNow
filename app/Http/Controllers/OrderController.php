@@ -8,6 +8,7 @@ use App\Order;
 use App\Product;
 use App\ScheduledOrder;
 use App\ShippingAddress;
+use App\ShippingOrder;
 use App\User;
 
 class OrderController extends Controller
@@ -74,13 +75,26 @@ class OrderController extends Controller
             Order::create([
                 'order_id' => $order_no,
                 'item' => $item->id,
-                'quantity' => $item->quantity
+                'quantity' => $item->quantity,
+                'price' => $item->price
             ]);
 
         });
 
         if ($store) {
             CartController::deleteCartItems();
+
+            $shipping = ShippingAddress::where('user_id',auth()->id())->first();
+
+            ShippingOrder::create([
+                'order_no' => $order_no,
+                'user_id' => auth()->id(),
+                'building_details' => $shipping->building_details,
+                'street' => $shipping->street,
+                'city' => $shipping->city,
+                'zip' => $shipping->zip,
+                'landmark' => $shipping->landmark,
+            ]);
         }
 
         return redirect('/thankYou')->with('success', true);

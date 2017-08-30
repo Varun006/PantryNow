@@ -5134,119 +5134,6 @@ module.exports = function clone(obj) {
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-// This file hosts our error definitions
-// We use custom error "types" so that we can act on them when we need it
-// e.g.: if error instanceof errors.UnparsableJSON then..
-
-var inherits = __webpack_require__(11);
-
-function AlgoliaSearchError(message, extraProperties) {
-  var forEach = __webpack_require__(9);
-
-  var error = this;
-
-  // try to get a stacktrace
-  if (typeof Error.captureStackTrace === 'function') {
-    Error.captureStackTrace(this, this.constructor);
-  } else {
-    error.stack = (new Error()).stack || 'Cannot get a stacktrace, browser is too old';
-  }
-
-  this.name = 'AlgoliaSearchError';
-  this.message = message || 'Unknown error';
-
-  if (extraProperties) {
-    forEach(extraProperties, function addToErrorObject(value, key) {
-      error[key] = value;
-    });
-  }
-}
-
-inherits(AlgoliaSearchError, Error);
-
-function createCustomError(name, message) {
-  function AlgoliaSearchCustomError() {
-    var args = Array.prototype.slice.call(arguments, 0);
-
-    // custom message not set, use default
-    if (typeof args[0] !== 'string') {
-      args.unshift(message);
-    }
-
-    AlgoliaSearchError.apply(this, args);
-    this.name = 'AlgoliaSearch' + name + 'Error';
-  }
-
-  inherits(AlgoliaSearchCustomError, AlgoliaSearchError);
-
-  return AlgoliaSearchCustomError;
-}
-
-// late exports to let various fn defs and inherits take place
-module.exports = {
-  AlgoliaSearchError: AlgoliaSearchError,
-  UnparsableJSON: createCustomError(
-    'UnparsableJSON',
-    'Could not parse the incoming response as JSON, see err.more for details'
-  ),
-  RequestTimeout: createCustomError(
-    'RequestTimeout',
-    'Request timedout before getting a response'
-  ),
-  Network: createCustomError(
-    'Network',
-    'Network issue, see err.more for details'
-  ),
-  JSONPScriptFail: createCustomError(
-    'JSONPScriptFail',
-    '<script> was loaded but did not call our provided callback'
-  ),
-  JSONPScriptError: createCustomError(
-    'JSONPScriptError',
-    '<script> unable to load due to an `error` event on it'
-  ),
-  Unknown: createCustomError(
-    'Unknown',
-    'Unknown error occured'
-  )
-};
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports) {
-
-
-var hasOwn = Object.prototype.hasOwnProperty;
-var toString = Object.prototype.toString;
-
-module.exports = function forEach (obj, fn, ctx) {
-    if (toString.call(fn) !== '[object Function]') {
-        throw new TypeError('iterator must be a function');
-    }
-    var l = obj.length;
-    if (l === +l) {
-        for (var i = 0; i < l; i++) {
-            fn.call(ctx, obj[i], i, obj);
-        }
-    } else {
-        for (var k in obj) {
-            if (hasOwn.call(obj, k)) {
-                fn.call(ctx, obj[k], k, obj);
-            }
-        }
-    }
-};
-
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
 /*!
  * sweetalert2 v6.6.8
  * Released under the MIT License.
@@ -6915,6 +6802,119 @@ if (window.Sweetalert2) window.sweetAlert = window.swal = window.Sweetalert2;
 
 
 /***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// This file hosts our error definitions
+// We use custom error "types" so that we can act on them when we need it
+// e.g.: if error instanceof errors.UnparsableJSON then..
+
+var inherits = __webpack_require__(11);
+
+function AlgoliaSearchError(message, extraProperties) {
+  var forEach = __webpack_require__(10);
+
+  var error = this;
+
+  // try to get a stacktrace
+  if (typeof Error.captureStackTrace === 'function') {
+    Error.captureStackTrace(this, this.constructor);
+  } else {
+    error.stack = (new Error()).stack || 'Cannot get a stacktrace, browser is too old';
+  }
+
+  this.name = 'AlgoliaSearchError';
+  this.message = message || 'Unknown error';
+
+  if (extraProperties) {
+    forEach(extraProperties, function addToErrorObject(value, key) {
+      error[key] = value;
+    });
+  }
+}
+
+inherits(AlgoliaSearchError, Error);
+
+function createCustomError(name, message) {
+  function AlgoliaSearchCustomError() {
+    var args = Array.prototype.slice.call(arguments, 0);
+
+    // custom message not set, use default
+    if (typeof args[0] !== 'string') {
+      args.unshift(message);
+    }
+
+    AlgoliaSearchError.apply(this, args);
+    this.name = 'AlgoliaSearch' + name + 'Error';
+  }
+
+  inherits(AlgoliaSearchCustomError, AlgoliaSearchError);
+
+  return AlgoliaSearchCustomError;
+}
+
+// late exports to let various fn defs and inherits take place
+module.exports = {
+  AlgoliaSearchError: AlgoliaSearchError,
+  UnparsableJSON: createCustomError(
+    'UnparsableJSON',
+    'Could not parse the incoming response as JSON, see err.more for details'
+  ),
+  RequestTimeout: createCustomError(
+    'RequestTimeout',
+    'Request timedout before getting a response'
+  ),
+  Network: createCustomError(
+    'Network',
+    'Network issue, see err.more for details'
+  ),
+  JSONPScriptFail: createCustomError(
+    'JSONPScriptFail',
+    '<script> was loaded but did not call our provided callback'
+  ),
+  JSONPScriptError: createCustomError(
+    'JSONPScriptError',
+    '<script> unable to load due to an `error` event on it'
+  ),
+  Unknown: createCustomError(
+    'Unknown',
+    'Unknown error occured'
+  )
+};
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+
+var hasOwn = Object.prototype.hasOwnProperty;
+var toString = Object.prototype.toString;
+
+module.exports = function forEach (obj, fn, ctx) {
+    if (toString.call(fn) !== '[object Function]') {
+        throw new TypeError('iterator must be a function');
+    }
+    var l = obj.length;
+    if (l === +l) {
+        for (var i = 0; i < l; i++) {
+            fn.call(ctx, obj[i], i, obj);
+        }
+    } else {
+        for (var k in obj) {
+            if (hasOwn.call(obj, k)) {
+                fn.call(ctx, obj[k], k, obj);
+            }
+        }
+    }
+};
+
+
+
+/***/ }),
 /* 11 */
 /***/ (function(module, exports) {
 
@@ -6947,7 +6947,7 @@ if (typeof Object.create === 'function') {
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var foreach = __webpack_require__(9);
+var foreach = __webpack_require__(10);
 
 module.exports = function map(arr, fn) {
   var newArr = [];
@@ -18637,7 +18637,7 @@ IndexCore.prototype.typeAheadValueOption = null;
 
 module.exports = buildSearchMethod;
 
-var errors = __webpack_require__(8);
+var errors = __webpack_require__(9);
 
 /**
  * Creates a search method to be used in clients
@@ -18708,7 +18708,7 @@ function buildSearchMethod(queryParam, url) {
 /* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var foreach = __webpack_require__(9);
+var foreach = __webpack_require__(10);
 
 module.exports = function merge(destination/* , sources */) {
   var sources = Array.prototype.slice.call(arguments);
@@ -29843,7 +29843,7 @@ return zhTw;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(154);
-module.exports = __webpack_require__(263);
+module.exports = __webpack_require__(266);
 
 
 /***/ }),
@@ -29881,6 +29881,7 @@ Vue.component('modal-box', __webpack_require__(251));
 Vue.component('thank-you', __webpack_require__(254));
 Vue.component('login-modal', __webpack_require__(257));
 Vue.component('logged-in-modal', __webpack_require__(260));
+Vue.component('ask-zip', __webpack_require__(263));
 
 var app = new Vue({
     el: '#app',
@@ -60670,7 +60671,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_sweetalert2__);
 //
 //
@@ -64546,7 +64547,7 @@ var deprecate = __webpack_require__(18);
 var deprecatedMessage = __webpack_require__(19);
 var AlgoliaSearchCore = __webpack_require__(210);
 var inherits = __webpack_require__(11);
-var errors = __webpack_require__(8);
+var errors = __webpack_require__(9);
 
 function AlgoliaSearch() {
   AlgoliaSearchCore.apply(this, arguments);
@@ -65042,7 +65043,7 @@ var IndexCore = __webpack_require__(34);
 var deprecate = __webpack_require__(18);
 var deprecatedMessage = __webpack_require__(19);
 var exitPromise = __webpack_require__(37);
-var errors = __webpack_require__(8);
+var errors = __webpack_require__(9);
 
 var deprecateForwardToSlaves = deprecate(
   function() {},
@@ -66190,7 +66191,7 @@ Index.prototype.updateApiKey = function(key, acls, params, callback) {
 
 module.exports = function omit(obj, test) {
   var keys = __webpack_require__(206);
-  var foreach = __webpack_require__(9);
+  var foreach = __webpack_require__(10);
 
   var filtered = {};
 
@@ -66735,7 +66736,7 @@ function isUndefined(arg) {
 
 module.exports = AlgoliaSearchCore;
 
-var errors = __webpack_require__(8);
+var errors = __webpack_require__(9);
 var exitPromise = __webpack_require__(37);
 var IndexCore = __webpack_require__(34);
 var store = __webpack_require__(211);
@@ -67210,7 +67211,7 @@ AlgoliaSearchCore.prototype._getSearchParams = function(args, params) {
 };
 
 AlgoliaSearchCore.prototype._computeRequestHeaders = function(additionalUA, withAPIKey) {
-  var forEach = __webpack_require__(9);
+  var forEach = __webpack_require__(10);
 
   var ua = additionalUA ?
     this._ua + ';' + additionalUA :
@@ -67425,7 +67426,7 @@ AlgoliaSearchCore.prototype._cacheAppIdData = function(data) {
 };
 
 AlgoliaSearchCore.prototype._partialAppIdDataUpdate = function(newData) {
-  var foreach = __webpack_require__(9);
+  var foreach = __webpack_require__(10);
   var currentData = this._getAppIdData();
   foreach(newData, function(value, key) {
     currentData[key] = value;
@@ -68015,7 +68016,7 @@ var Promise = global.Promise || __webpack_require__(216).Promise;
 // using XMLHttpRequest, XDomainRequest and JSONP as fallback
 module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
   var inherits = __webpack_require__(11);
-  var errors = __webpack_require__(8);
+  var errors = __webpack_require__(9);
   var inlineHeaders = __webpack_require__(218);
   var jsonpRequest = __webpack_require__(220);
   var places = __webpack_require__(221);
@@ -69539,7 +69540,7 @@ var objectKeys = Object.keys || function (obj) {
 
 module.exports = jsonpRequest;
 
-var errors = __webpack_require__(8);
+var errors = __webpack_require__(9);
 
 var JSONPCounter = 0;
 
@@ -77735,7 +77736,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_sweetalert2__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_sweetalert2_dist_sweetalert2_css__ = __webpack_require__(241);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_sweetalert2_dist_sweetalert2_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_sweetalert2_dist_sweetalert2_css__);
@@ -77745,6 +77746,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment_locale_pt_br___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_moment_locale_pt_br__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vue_js_modal__ = __webpack_require__(246);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vue_js_modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_vue_js_modal__);
+//
+//
 //
 //
 //
@@ -80237,8 +80240,10 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_22__;
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('table', {
-    staticClass: "table cart table-responsive"
+  return _c('div', {
+    staticClass: "table-responsive"
+  }, [_c('table', {
+    staticClass: "table cart"
   }, [_vm._m(0), _vm._v(" "), _c('tbody', [_vm._l((_vm.items), function(item) {
     return _c('tr', {
       staticClass: "cart_item"
@@ -80394,7 +80399,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.validateCoupon($event)
       }
     }
-  }, [_vm._v("\n                            Apply Coupon\n                        ")])])]) : _vm._e(), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n                                Apply Coupon\n                            ")])])]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "col-xs-8 nopadding",
     class: {
       'col-md-12': _vm.col12Class, 'col-md-8 ': _vm.col8Md
@@ -80415,7 +80420,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.showTimeSelection()
       }
     }
-  }, [_vm._v("Schedule your order")])])])])])], 2)])
+  }, [_vm._v("Schedule your order")])])])])])], 2)])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('thead', [_c('tr', [_c('th', {
     staticClass: "cart-product-remove"
@@ -81047,7 +81052,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_sweetalert2__);
 //
 //
@@ -81123,7 +81128,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_sweetalert2__);
 //
 //
@@ -81215,7 +81220,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_sweetalert2__);
 //
 //
@@ -81252,6 +81257,170 @@ if (false) {
 
 /***/ }),
 /* 263 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(264),
+  /* template */
+  __webpack_require__(265),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/varundavda/code/pantryNow/resources/assets/js/components/askZip.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] askZip.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-83504a30", Component.options)
+  } else {
+    hotAPI.reload("data-v-83504a30", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 264 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_sweetalert2__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    created: function created() {
+        __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()({
+            title: 'Enter your pin to check if we deliver in your locality.',
+            input: 'text',
+            showCancelButton: false,
+            confirmButtonText: 'Check',
+            showLoaderOnConfirm: true,
+            preConfirm: function preConfirm(zip) {
+                return new Promise(function (resolve, reject) {
+                    setTimeout(function () {
+                        if (zip === '') {
+                            reject('Please enter a zip code.');
+                        } else {
+                            resolve();
+                        }
+                    }, 2000);
+                });
+            },
+            allowOutsideClick: false
+        }).then(function (zip) {
+            axios.post('/checkZipFromInput', { zip: zip }).then(function (response) {
+                if (response.data.exist) {
+                    __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()('success', 'We deliver to your pincode', 'success');
+                } else {
+                    __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()('Sorry!', 'We do not deliver to your pincode yet.', 'info');
+                }
+            });
+        });
+    }
+});
+//        data() {
+//            return {
+//                zip: '',
+//                success: false,
+//                error: false,
+//            }
+//        },
+//
+//        methods: {
+//            checkZip() {
+//                this.success = false; this.error = false;
+//
+//                axios.post('/checkZip', {zip: this.zip})
+//                    .then((response) => {
+//                    alert(response.data.exist);
+//                        if (response.data.exist) {
+//                            this.success = true;
+//                        }else{
+//                            this.error = true;
+//                        }
+//                    })
+//            }
+//        }
+//    }
+
+/***/ }),
+/* 265 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c("div")
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-83504a30", module.exports)
+  }
+}
+
+/***/ }),
+/* 266 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
